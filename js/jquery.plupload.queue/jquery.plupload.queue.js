@@ -234,7 +234,7 @@ used as it is.
 
 						handleStatus(file);
 
-						$('#' + file.id + '.plupload_delete a').click(function(e) {
+						$('#' + file.id + '.plupload_delete a').on('click', function(e) {
 							$('#' + file.id).remove();
 							uploader.removeFile(file);
 
@@ -296,7 +296,7 @@ used as it is.
 
 							// Display input element
 							targetSpan.hide().after('<input type="text" />');
-							targetSpan.next().val(name).focus().blur(function() {
+							targetSpan.next().val(name).trigger('focus').on('blur', function() {
 								targetSpan.show().next().remove();
 							}).keydown(function(e) {
 								var targetInput = $(this);
@@ -307,7 +307,7 @@ used as it is.
 									// Rename file and glue extension back on
 									file.name = targetInput.val() + ext;
 									targetSpan.text(file.name);
-									targetInput.blur();
+									targetInput.trigger('blur');
 								}
 							});
 						});
@@ -315,7 +315,7 @@ used as it is.
 
 					$('#' + id + '_container').attr('title', 'Using runtime: ' + res.runtime);
 
-					$('a.plupload_start', target).click(function(e) {
+					$('a.plupload_start', target).on('click', function(e) {
 						if (!$(this).hasClass('plupload_disabled')) {
 							uploader.start();
 						}
@@ -323,7 +323,7 @@ used as it is.
 						e.preventDefault();
 					});
 
-					$('a.plupload_stop', target).click(function(e) {
+					$('a.plupload_stop', target).on('click', function(e) {
 						e.preventDefault();
 						uploader.stop();
 					});
